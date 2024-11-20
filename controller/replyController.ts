@@ -1,6 +1,7 @@
-export const createReply = async (req:Request, res: Response) => {
+import { Response, Request } from "express";
 
+export const createReply = async (req: Request, res: Response) => {
   try {
-    
-  }
-}
+    const { message, userId, commentId } = req.body;
+  } catch (error) {}
+};

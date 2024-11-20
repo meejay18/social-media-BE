@@ -1,21 +1,21 @@
 import { Request, Response } from "express";
 import commentModel from "../model/commentModel";
 
-export const userComment = async (req: Request, res: Response) => {
-  try {
-    const { userID } = req.params;
-    const commentId = await commentModel.findById(userID);
+// export const userComment = async (req: Request, res: Response) => {
+//   try {
+//     const { userID } = req.params;
+//     const commentId = await commentModel.findById(userID);
 
-    return res.status(201).json({
-      message: "user found ",
-      data: commentId,
-    });
-  } catch (Error) {
-    return res.status(404).json({
-      message: "User not found",
-    });
-  }
-};
+//     return res.status(201).json({
+//       message: "user found ",
+//       data: commentId,
+//     });
+//   } catch (Error) {
+//     return res.status(404).json({
+//       message: "User not found",
+//     });
+//   }
+// };
 
 export const commentmessage = async (req: Request, res: Response) => {
   try {
