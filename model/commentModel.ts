@@ -1,7 +1,7 @@
 import { Schema, Types, Document, model } from "mongoose";
 
 interface iComment {
-  message: string;
+  message: Array<string>;
   userId: {};
   replies: Array<{}>;
   createdAt: Date;
@@ -11,10 +11,12 @@ interface iCommentData extends iComment, Document {}
 
 const commentModel = new Schema<iCommentData>(
   {
-    message: {
-      type: String,
-      required: true,
-    },
+    message: [
+      {
+        type: String,
+        required: true,
+      },
+    ],
     userId: {
       type: Types.ObjectId,
       required: true,

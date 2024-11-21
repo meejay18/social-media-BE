@@ -17,12 +17,27 @@ import commentModel from "../model/commentModel";
 //   }
 // };
 
-export const commentmessage = async (req: Request, res: Response) => {
-  try {
-    const { message, userId } = req.body;
+export const createComment = async (req: Request, res: Response) => {
+  const { commentId } = req.params;
+  const { message } = req.body;
 
-    const comment = await commentModel.findById(userId);
-    comment?.save();
+  try {
+    const comment = await commentModel.findById(commentId);
+
+    if (!comment) {
+      return res.status(500).json({
+        message: "Message content is required",
+      });
+    }
+
+    if (comment) {
+      comment.message.push(message);
+    } else {
+      return res.status(500).json({
+        message: "Comment not found",
+      });
+    }
+    await comment?.save();
 
     return res.status(201).json({
       message: "Comment created Successfully",
@@ -30,7 +45,7 @@ export const commentmessage = async (req: Request, res: Response) => {
     });
   } catch (error) {
     return res.status(404).json({
-      message: "Couldnt create message",
+      message: "Couldnt create comment",
     });
   }
 };
